@@ -1,0 +1,21 @@
+#main_container {
+   display: flex;
+}
+
+.badgeDisplayArea {
+  display: flex;
+flex-direction: row;
+width: 20em;
+}
+
+img  {
+  vertical-align: top;
+  height: 100px;
+}
+
+.videoTitle  {
+  padding-left: 1em;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+  }
