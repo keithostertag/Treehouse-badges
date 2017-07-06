@@ -3,6 +3,7 @@ $.ajax({
 url:"https://teamtreehouse.com/keithostertag.json",
 success: function(teamtree) {
   console.log(teamtree);
+  console.log(teamtree.name);
 
 // iterate and place into document one line at a time
 // create div, place badge then badge info
@@ -11,6 +12,9 @@ success: function(teamtree) {
 var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
+
+// append users name in intro div
+  $('#userName').append(teamtree.name);
 
 // now iterate through object to get badges
     $.each(teamtree.badges, function( idx, badge) {
