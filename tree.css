@@ -61,8 +61,15 @@ img  {
   justify-content: center;
 }
 
-i {
+.fa {
   display: inline-block;
   color: green;
   margin-right: 0.3rem;
+}
+
+.date {
+  margin-right: 0.7rem;
+  color: #894141;
+  white-space: nowrap;
+  font-size: .7rem;
 }
