@@ -17,17 +17,30 @@ body, html {
 
 #intro  {
   display: flex;
-     align-items: center;
-     justify-content: center;
+     /*align-items: center;*/
+     justify-content: space-around;
+        flex-wrap: wrap;
+     /*flex-direction: row;*/
+     /*display: block;*/
+     /*position: relative;
+     height: 6rem;*/
 }
 
 h1  {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
+  /*white-space: nowrap;*/
+  /*position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);*/
 }
 
 #userName {
-      white-space: nowrap;
+      /*white-space: nowrap;*/
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
 }
 
 #main_container {
@@ -93,4 +106,16 @@ img  {
   color: #894141;
   white-space: nowrap;
   font-size: .7rem;
+}
+
+.points {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+#pointsHeader {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-left: 2rem;
 }

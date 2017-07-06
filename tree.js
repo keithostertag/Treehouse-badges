@@ -14,7 +14,8 @@ var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 ];
 
 // append users name in intro div
-  $('#userName').append(teamtree.name);
+  $('#userName').append("Treehouse Video Badges earned by " + teamtree.name);
+  // document.getElementById('userName').append(teamtree.name);
 
 // now iterate through object to get badges
     $.each(teamtree.badges, function( idx, badge) {
@@ -42,6 +43,15 @@ var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "</span>");
 
     }); // end outer each
+
+// create and fill points earned section through iteration
+    $('#badgePoints').append("<p id='pointsHeader'>Points Earned by Category");
+    $.each(teamtree.points, function( key, value) {
+        if(!(value === 0))  {
+          $('#badgePoints').append("<p class='points'>" + key + ": " + value);
+        }
+    });
+
 
 }, // end success function
 error: function() {
