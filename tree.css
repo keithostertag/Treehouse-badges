@@ -15,7 +15,7 @@ body, html {
 
 }
 
-#intro  {
+#heading  {
   display: flex;
      /*align-items: center;*/
      justify-content: space-around;
@@ -81,7 +81,7 @@ img  {
   /*padding-left: 1em;*/
     display: flex;
     /*flex-direction: column;*/
-    white-space: wrap;
+    white-space: normal;
   }
 
 .badgeNumber  {
@@ -112,6 +112,8 @@ img  {
   font-size: 1.2rem;
   font-weight: bold;
   margin-left: 2rem;
+  margin-top: 0;
+  margin-bottom: 0.4rem;
 }
 
 #pointsHeader {

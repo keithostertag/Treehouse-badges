@@ -1,16 +1,23 @@
+window.onload = function() {
 
+// $('#myForm input[name=submit]').click(function() {
+$('#myForm button').click(function() {
 $.ajax({
-url:"https://teamtreehouse.com/mitchellstarkey.json",
+  url:"https://teamtreehouse.com/mitchellstarkey.json",
+// url:"https://teamtreehouse.com/" +
+// $('#myForm input[name=profileName]').val()  + ".json",
+// $('#myForm input[name=profileName]').val()  + ".json",
 success: function(teamtree) {
   console.log(teamtree);
 
-  // sort the object using compareValues function below
+  // sort the object using compareValues function
+  // var sortOrder = $('#myForm input[name=sortOrder]:checked', '#myForm').val();
       teamtree.badges.sort(compareValues('key', 'desc'));
 
 // iterate and place into document one line at a time
 // create div, place badge then badge info
 
-// first, setup for month short names
+// setup for month short names
 const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
@@ -47,9 +54,10 @@ const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     }); // end outer each
 
 // create and fill points earned section through iteration
+// first add the heading
     $('#badgePoints').append("<p id='pointsHeader'>Points Earned by Category");
 
-// created array of arrays from teamtree.points
+// create array of arrays from teamtree.points
     var sortedArray = [];
     for (var pts in teamtree.points)  {
       sortedArray.push([pts, teamtree.points[pts]]);
@@ -62,7 +70,7 @@ const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     });
 
 console.log(sortedArray);
-
+// only display the points for categories that have points > 0
     for (i=0;i<sortedArray.length;i++) {
         if (sortedArray[i][1] !== 0) {
               console.log(sortedArray[i][0] + ": " + sortedArray[i][1]);
@@ -111,3 +119,5 @@ error: function() {
   alert('Error')
 }
 });
+}); // intro button click function
+} // window.onload function
