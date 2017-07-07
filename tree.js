@@ -1,15 +1,17 @@
 
 $.ajax({
-url:"https://teamtreehouse.com/keithostertag.json",
+url:"https://teamtreehouse.com/mitchellstarkey.json",
 success: function(teamtree) {
   console.log(teamtree);
-  console.log(teamtree.name);
+
+  // sort the object using compareValues function below
+      teamtree.badges.sort(compareValues('key', 'desc'));
 
 // iterate and place into document one line at a time
 // create div, place badge then badge info
 
 // first, setup for month short names
-var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
@@ -33,7 +35,7 @@ var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 
 // format then add date
           var date = new Date(badge.earned_date);
-          var dateWanted = monthShortNames[(date.getMonth())] + " " + date.getDate() + "," + date.getFullYear();
+          var dateWanted = monthShortNames[(date.getMonth())] + " " + date.getDate() + ", " + date.getFullYear();
 
 // place badge info where it belongs at bottom of badgeDisplayArea
           $('#badge' + idx ).append("<span class='badgeNumber'> Badge ID " +
@@ -46,11 +48,62 @@ var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 
 // create and fill points earned section through iteration
     $('#badgePoints').append("<p id='pointsHeader'>Points Earned by Category");
-    $.each(teamtree.points, function( key, value) {
-        if(!(value === 0))  {
-          $('#badgePoints').append("<p class='points'>" + key + ": " + value);
-        }
+
+// created array of arrays from teamtree.points
+    var sortedArray = [];
+    for (var pts in teamtree.points)  {
+      sortedArray.push([pts, teamtree.points[pts]]);
+    }
+
+// sort the array
+    sortedArray.sort(function(a, b) {
+      return a[1] - b[1];  // sort on points
+      // return a.y - b.y;
     });
+
+console.log(sortedArray);
+
+    for (i=0;i<sortedArray.length;i++) {
+        if (sortedArray[i][1] !== 0) {
+              console.log(sortedArray[i][0] + ": " + sortedArray[i][1]);
+              var temp = "<p class='points'>" + sortedArray[i][0] + ": " + sortedArray[i][1] + "</p>";
+              document.getElementById('badgePoints').innerHTML += temp;
+        } ;  // end if
+    } ;// end for i
+
+
+
+    // function from https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
+    // use: sorted by key, in ascending order by default
+    //    object.sort(compareValues('key'));
+    // use: sorted by key in descending order
+    //    object.sort(compareValues('key', 'desc'));
+    // use: sorted by key in ascending order
+    //    object.sort(compareValues('key'));
+
+    function compareValues(key, order='asc') {
+      return function(a, b) {
+        if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+          // property doesn't exist on either object
+            return 0;
+        }
+
+        const varA = (typeof a[key] === 'string') ?
+          a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string') ?
+          b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        if (varA > varB) {
+          comparison = 1;
+        } else if (varA < varB) {
+          comparison = -1;
+        }
+        return (
+          (order == 'desc') ? (comparison * -1) : comparison
+        );
+      };
+    } // end of function compareValues
 
 
 }, // end success function
