@@ -1,18 +1,21 @@
 window.onload = function() {
 
-// $('#myForm input[name=submit]').click(function() {
-$('#myForm button').click(function() {
+$('#goButton').click(function() {
 $.ajax({
-  url:"https://teamtreehouse.com/mitchellstarkey.json",
-// url:"https://teamtreehouse.com/" +
-// $('#myForm input[name=profileName]').val()  + ".json",
-// $('#myForm input[name=profileName]').val()  + ".json",
+  url:"https://teamtreehouse.com/keithostertag.json",
 success: function(teamtree) {
   console.log(teamtree);
 
-  // sort the object using compareValues function
-  // var sortOrder = $('#myForm input[name=sortOrder]:checked', '#myForm').val();
-      teamtree.badges.sort(compareValues('key', 'desc'));
+  // sort the object by earned_date using compareValues function
+  var sortOrder = $( "input:checked" ).val();
+      teamtree.badges.sort(compareValues('earned_date', sortOrder));
+
+console.log("sort order is: " + sortOrder);
+
+      // Prevent form submission
+$( "form" ).submit(function( event ) {
+  event.preventDefault();
+});
 
 // iterate and place into document one line at a time
 // create div, place badge then badge info
@@ -22,7 +25,7 @@ const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-// append users name in intro div
+// append users name into div
   $('#userName').append("Treehouse Video Badges earned by " + teamtree.name);
   // document.getElementById('userName').append(teamtree.name);
 
@@ -118,6 +121,7 @@ console.log(sortedArray);
 error: function() {
   alert('Error')
 }
-});
-}); // intro button click function
+
+})  //ajax
+}) // button click function
 } // window.onload function
