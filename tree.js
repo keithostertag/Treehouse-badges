@@ -1,8 +1,11 @@
 window.onload = function() {
 
 $('#goButton').click(function() {
+  // when goButton is clicked use ajax to get json file for entered profileName
 $.ajax({
-  url:"https://teamtreehouse.com/keithostertag.json",
+url:"https://teamtreehouse.com/" +
+$('#intro input[name=profileName]').val()  + ".json",
+
 success: function(teamtree) {
   console.log(teamtree);
 
@@ -10,24 +13,21 @@ success: function(teamtree) {
   var sortOrder = $( "input:checked" ).val();
       teamtree.badges.sort(compareValues('earned_date', sortOrder));
 
-console.log("sort order is: " + sortOrder);
-
-      // Prevent form submission
+      // Prevent form submission if form is used(!)
 $( "form" ).submit(function( event ) {
   event.preventDefault();
 });
 
-// iterate and place into document one line at a time
-// create div, place badge then badge info
-
-// setup for month short names
+// setup for month short names for later use with dates
 const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-// append users name into div
-  $('#userName').append("Treehouse Video Badges earned by " + teamtree.name);
-  // document.getElementById('userName').append(teamtree.name);
+// iterate through object and place into document a line at a time
+// create div, place badge then badge info
+
+// append user name into div
+  $('#userName').append(teamtree.badges.length + " Treehouse Video Badges earned by " + teamtree.name);
 
 // now iterate through object to get badges
     $.each(teamtree.badges, function( idx, badge) {
@@ -60,13 +60,13 @@ const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 // first add the heading
     $('#badgePoints').append("<p id='pointsHeader'>Points Earned by Category");
 
-// create array of arrays from teamtree.points
+// create array of arrays from teamtree.points object
     var sortedArray = [];
     for (var pts in teamtree.points)  {
       sortedArray.push([pts, teamtree.points[pts]]);
     }
 
-// sort the array
+// sort the array of arrays
     sortedArray.sort(function(a, b) {
       return a[1] - b[1];  // sort on points
       // return a.y - b.y;
