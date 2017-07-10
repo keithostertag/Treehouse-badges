@@ -1,4 +1,3 @@
-window.onload = function() {
 
 $('#goButton').click(function() {
   // when goButton is clicked use ajax to get json file for entered profileName
@@ -124,4 +123,3 @@ error: function() {
 
 })  //ajax
 }) // button click function
-} // window.onload function
