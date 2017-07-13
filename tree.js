@@ -12,6 +12,11 @@ success: function(teamtree) {
   var sortOrder = $( "input:checked" ).val();
       teamtree.badges.sort(compareValues('earned_date', sortOrder));
 
+
+
+
+
+
       // Prevent form submission if form is used(!)
 $( "form" ).submit(function( event ) {
   event.preventDefault();
@@ -83,6 +88,25 @@ console.log(sortedArray);
 
 
 
+
+
+
+}, // end of success function
+error: function() {
+  alert('Error')
+}
+
+});  // end of ajax
+}); // end of button click function
+
+
+
+
+
+
+
+
+
     // function from https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
     // use: sorted by key, in ascending order by default
     //    object.sort(compareValues('key'));
@@ -114,12 +138,3 @@ console.log(sortedArray);
         );
       };
     } // end of function compareValues
-
-
-}, // end success function
-error: function() {
-  alert('Error')
-}
-
-})  //ajax
-}) // button click function
