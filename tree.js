@@ -85,6 +85,10 @@ var filterStringCount = 0;  // for later use when search string is used
       console.log("filterStringCount is " + filterStringCount);
       $('#userName').append(" <h5>" + filterStringCount +
       " badges when filtered by \"" + filterString + "\": </h5>");
+    } else if (filterString != "" && filterStringCount == 0) {
+      $("#userName").empty();
+      $('#userName').append("<br>Sorry, there are no badges for " +
+      teamtree.name + " when filtered by \"" + filterString + "\"");
     }
 
 // create and fill points earned section through iteration
@@ -104,7 +108,6 @@ if (filterString == 0 ) {
 // sort the array of arrays
     sortedArray.sort(function(a, b) {
       return a[1] - b[1];  // sort on points
-      // return a.y - b.y;
     });
 
 console.log(sortedArray);
