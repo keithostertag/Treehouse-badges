@@ -10,16 +10,21 @@ body, html {
   background-color: #f4eed5;
     }
 
+/*info div is only used for including the info.html file when the infoButton is pressed*/
+#info {
+  display: block;
+  width: 50%;
+  font-size: 1.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  }
+
 #wrapper  {
   display: flex;
   flex-direction: column;
-
 }
 
 #heading  {
-  /*display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;*/
   display: block;
   text-align: center;
 }
@@ -36,6 +41,7 @@ body, html {
   box-shadow: inset 0 0 0 1px #707070;
   transition: box-shadow 0.3s, border 0.3s;
 }
+
 #intro input[type="text"]:focus,
 #intro input[type="text"].focus {
   border: solid 5px #331e1e;
@@ -76,13 +82,13 @@ h1  {
 
 .badgeDisplayArea {
   display: flex;
-flex-direction: column;
-width: 20rem;
-padding-bottom: 0.5rem;
-margin-bottom: 2rem;
-margin-right: 1rem;
-margin-left: 1rem;
-background-color: #ccc;
+  flex-direction: column;
+  width: 20rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  background-color: #ccc;
 }
 
 img  {
@@ -136,3 +142,11 @@ img  {
   font-weight: bold;
   margin-left: 2rem;
 }
+
+@media only screen and (max-width: 660px) {
+
+  #info {
+    width: 90%;
+    }
+
+} /*end of media queries*/

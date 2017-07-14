@@ -1,17 +1,14 @@
+// load info into page when infoButton is clicked
 $('#infoButton').click(function() {
-    $(function()  {
-      $('#userName').load('info.html');
-    });
-}); // end info click function
+    emptyDivs();
+    $('#info').load('info.html');
+        }); // end infoButton click function
 
 $('#goButton').click(function() {
   // when goButton is clicked use ajax to get json file for entered profileName
 
   // make certain appropriate divs are empty to start
-  $("#userName").empty();
-  $("#main_container").empty();
-  $("#innerContainer").empty();
-  $("#badgePoints").empty();
+  emptyDivs();
 
 $.ajax({
 url:"https://teamtreehouse.com/" +
@@ -23,19 +20,13 @@ success: function(teamtree) {
   var sortOrder = $( "input:checked" ).val();
       teamtree.badges.sort(compareValues('earned_date', sortOrder));
 
-// get the filterStrig if it was entered, default in html is ""
+// get the filterString if it was entered, default in html is ""
   var filterString = $('input[name=filterString]').val().toLowerCase();
     console.log("filterString is: " + filterString);
 
-      // Prevent form submission if form is used(!)
-$( "form" ).submit(function( event ) {
-    event.preventDefault();
-});
-
 // setup for month short names for later use with dates
 const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 var filterStringCount = 0;  // for later use when search string is used
 
@@ -63,56 +54,55 @@ var filterStringCount = 0;  // for later use when search string is used
       "><div class='spanS'>");
 
 // iterate inside each badge to get its assoc titles
-          $.each(badge.courses, function(index, course) {
-            $('#badge' + idx + ' .innerContainer .spanS').
-            append("<span class='videoTitle'><i class='fa fa-caret-right'></i>" +
-            course.title + "</span>");
-          });
+      $.each(badge.courses, function(index, course) {
+        $('#badge' + idx + ' .innerContainer .spanS').
+        append("<span class='videoTitle'><i class='fa fa-caret-right'></i>" +
+        course.title + "</span>");
+            });
           // end badge.courses each
 
 // format then add date
-          var date = new Date(badge.earned_date);
-          var dateWanted = monthShortNames[(date.getMonth())] + " " + date.getDate() + ", " + date.getFullYear();
+      var date = new Date(badge.earned_date);
+      var dateWanted = monthShortNames[(date.getMonth())] + " " + date.getDate() + ", " + date.getFullYear();
 
 // place badge info where it belongs at bottom of badgeDisplayArea
-          $('#badge' + idx ).append("<span class='badgeNumber'> Badge ID " +
-          badge.id +
-          ": " +
-          badge.name + "<i class='date' > (" + dateWanted + ")</i>" +
-          "</span>");
+        $('#badge' + idx ).append("<span class='badgeNumber'> Badge ID " +
+        badge.id +
+        ": " +
+        badge.name + "<i class='date' > (" + dateWanted + ")</i>" +
+        "</span>");
 } // end for if myJSON statment
 
     }); // end outer each
 
-//  subheading with count for when a search string was used
+//  create a subheading with count for when a search string was used
     if (filterString != "" && filterStringCount > 0) {
       console.log("filterStringCount is " + filterStringCount);
       $('#userName').append(" <h5>" + filterStringCount +
       " badges when filtered by \"" + filterString + "\": </h5>");
-    } else if (filterString != "" && filterStringCount == 0) {
-      $("#userName").empty();
-      $('#userName').append("<br>Sorry, there are no badges for " +
-      teamtree.name + " when filtered by \"" + filterString + "\"");
-    }
+          } else if (filterString != "" && filterStringCount == 0) {
+            $("#userName").empty();
+            $('#userName').append("<br>Sorry, there are no badges for " +
+            teamtree.name + " when filtered by \"" + filterString + "\"");
+          }
 
 // create and fill points earned section through iteration
-// first add the heading
-
 // we don't want the points appended if a subset of badges was created by a filterString
 if (filterString == 0 ) {
 
+// first add the heading
     $('#badgePoints').append("<p id='pointsHeader'>Total Points Earned by Category");
 
 // create array of arrays from teamtree.points object
     var sortedArray = [];
     for (var pts in teamtree.points)  {
       sortedArray.push([pts, teamtree.points[pts]]);
-    }
+        }
 
 // sort the array of arrays
     sortedArray.sort(function(a, b) {
       return a[1] - b[1];  // sort on points
-    });
+        });
 
 console.log(sortedArray);
 // only display the points for categories that have points > 0
@@ -124,18 +114,25 @@ console.log(sortedArray);
         } ;  // end if
     } ;// end for i
 
-} // end if filterString == 0
+  } // end if filterString == 0
 
 }, // end of success function
 
 error: function() {
   alert('Error... Can\'t find Treehouse profile name: ' +
   $('#intro input[name=profileName]').val());
-}
+      }
 
-});  // end of ajax
+    });  // end of ajax
 }); // end of button click function
 
+function emptyDivs()  {
+    $("#info").empty();
+    $("#userName").empty();
+    $("#main_container").empty();
+    $("#innerContainer").empty();
+    $("#badgePoints").empty();
+    }
 
     // function from https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
     // use: sorted by key, in ascending order by default
