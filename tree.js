@@ -1,31 +1,40 @@
 
 $('#goButton').click(function() {
   // when goButton is clicked use ajax to get json file for entered profileName
+
+  // make certain appropriate divs are empty to start
+  // $("#heading").empty();
+  $("#userName").empty();
+  $("#main_container").empty();
+  $("#innerContainer").empty();
+  $("#badgePoints").empty();
+
 $.ajax({
 url:"https://teamtreehouse.com/" +
 $('#intro input[name=profileName]').val()  + ".json",
-
 success: function(teamtree) {
   console.log(teamtree);
+
+
 
   // sort the object by earned_date using compareValues function
   var sortOrder = $( "input:checked" ).val();
       teamtree.badges.sort(compareValues('earned_date', sortOrder));
 
-
-
-
-
+// get the filterStrig if it was entered, default in html is ""
+  var filterString = $('input[name=filterString]').val();
+    console.log("filterString is: " + filterString);
 
       // Prevent form submission if form is used(!)
 $( "form" ).submit(function( event ) {
-  event.preventDefault();
+    event.preventDefault();
 });
 
 // setup for month short names for later use with dates
 const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
+var filterStringCount = 0;
 
 // iterate through object and place into document a line at a time
 // create div, place badge then badge info
@@ -33,9 +42,25 @@ const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 // append user name into div
   $('#userName').append(teamtree.badges.length + " Treehouse Video Badges earned by " + teamtree.name);
 
+// if user has entered a filterString we'll need a heading, default is filterString = ""
+// if (filterString != "" && filterStringCount > 0) {
+//   $('#userName').append("<h5>badges when filtered by \"" + filterString + "\": </h5>");
+// }
+
 // now iterate through object to get badges
     $.each(teamtree.badges, function( idx, badge) {
-      $('#main_container').append("<div class='badgeDisplayArea' id=badge" + idx + "><div class='innerContainer'><img src=" +
+
+// create a stringified temp var so we can use indexOf
+// to check for occurances of filterString anywhere in object
+      var myJSON= JSON.stringify(this).toLowerCase();
+      console.log("filterString2 is: " + filterString);
+
+// check to see if user has entered a filter string
+// default is filterString = "" in index.html- so append them all unless filterString false
+  if (myJSON.indexOf(filterString) != -1) {
+      if (filterString > "") filterStringCount++; // how many badges filtered?
+      $('#main_container').append("<div class='badgeDisplayArea' id=badge" + idx +
+      "><div class='innerContainer'><img src=" +
       badge.icon_url +
       "><div class='spanS'>");
 
@@ -57,12 +82,29 @@ const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           ": " +
           badge.name + "<i class='date' > (" + dateWanted + ")</i>" +
           "</span>");
+} // end for if myJSON statment
+
+
 
     }); // end outer each
 
+    if (filterString != "" && filterStringCount > 0) {
+      console.log("filterStringCount is " + filterStringCount);
+      $('#userName').append(" <h5>" + filterStringCount +
+      " badges when filtered by \"" + filterString + "\": </h5>");
+    }
+
+    // if (filterStringCount > 0) $("h5").prepend("<i>xxxx</i>");
+  //   if (filterStringCount > 0) $("h5").prepend(filterStringCount + " ");
+  // console.log("filterStringCount is " + filterStringCount);
+
 // create and fill points earned section through iteration
 // first add the heading
-    $('#badgePoints').append("<p id='pointsHeader'>Points Earned by Category");
+
+// we don't want the points appended if a subset of abdges was created by a filterString
+if (filterString == 0 ) {
+
+    $('#badgePoints').append("<p id='pointsHeader'>Total Points Earned by Category");
 
 // create array of arrays from teamtree.points object
     var sortedArray = [];
@@ -86,14 +128,15 @@ console.log(sortedArray);
         } ;  // end if
     } ;// end for i
 
-
+} // end if if (filterString == 0 )
 
 
 
 
 }, // end of success function
 error: function() {
-  alert('Error')
+  alert('Error... Can\'t find Treehouse profile name: ' +
+  $('#intro input[name=profileName]').val());
 }
 
 });  // end of ajax
