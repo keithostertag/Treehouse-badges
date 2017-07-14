@@ -12,3 +12,7 @@ Background: Users for Treehouse online tutorial videos are provided with a JSON 
 It wasn't until nearing the end of writing this page that I discovered that Treehouse also provides this JSON data parsed at http://teamtreehouse.com/<profile_name (no file extension). My page offers two features not available from the Treehouse page: the ability to sort the data by "earned_date" and the ability to filter the data by a string.
 
 Filtering the data by a search string enables you to limit the badges displayed  to a subject or other related word/character strings (provided those strings are included in the badge data!). Filtering the data by a string is particularly convenient if the user has many badges. The string input field is not case sensitive, but no other input validation/restriction is performed.
+
+This page uses Google font Roboto, and only one Font Awesome icon (originally I had intended to use several so loading the set is kinda extravagant...)
+
+![screenshot](screenshot.png)
