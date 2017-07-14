@@ -10,6 +10,8 @@ $('#goButton').click(function() {
   // make certain appropriate divs are empty to start
   emptyDivs();
 
+$('#userName').append('<img id="loading" src="ajax-loader.gif">');
+
 $.ajax({
 url:"https://teamtreehouse.com/" +
 $('#intro input[name=profileName]').val()  + ".json",
@@ -32,6 +34,9 @@ var filterStringCount = 0;  // for later use when search string is used
 
 // iterate through object and place into document a line at a time
 // create div, place badge then badge info
+
+// clear the divs of the ajax-loader gif
+  emptyDivs();
 
 // append user name into div
   $('#userName').append(teamtree.badges.length + " Treehouse Video Badges earned by " + teamtree.name);
