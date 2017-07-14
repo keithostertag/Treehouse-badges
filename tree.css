@@ -16,9 +16,11 @@ body, html {
 }
 
 #heading  {
-  display: flex;
+  /*display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: wrap;*/
+  display: block;
+  text-align: center;
 }
 
 #intro{
@@ -54,6 +56,7 @@ h1  {
 #userName {
       margin-bottom: 1rem;
       padding-bottom: 1rem;
+      text-align: center;
 }
 
 #main_container {
