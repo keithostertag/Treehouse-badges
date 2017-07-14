@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Treehouse student badges</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="stylesheet" href="tree.css">
+<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<div id="intro">
+  <!-- <form> -->
+  <fieldset>
+    <legend>Enter profile name</legend>
+    <input type="text" name="profileName" value="alysonla">
+  </fieldset>
+  <fieldset>
+    <legend>Optional search string</legend>
+    <input type="text" name="filterString" value="">
+  </fieldset>
+  <fieldset>
+    <legend>Sort by date earned</legend>
+    <input type="radio" name="sortOrder" value="desc" checked/> Desc
+    <input type="radio" name="sortOrder" value="asc" /> Asc
+  </fieldset>
+    <button id="goButton">Go</button>
+    <button id="question">?</button>
+  <!-- </form> -->
+</div>
+
+<div id="wrapper">
+
+  <div id="heading">
+    <h1><i id="userName"></i></h1>
+  </div>      <!-- heading -->
+
+  <div id="main_container">
+  </div>  <!-- main_container -->
+
+  <div id="badgePoints">
+  </div>  <!-- badgePoints -->
+
+</div> <!-- wrapper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src= "tree.js"></script>
+</body>
+</html>
