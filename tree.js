@@ -20,7 +20,7 @@ success: function(teamtree) {
       teamtree.badges.sort(compareValues('earned_date', sortOrder));
 
 // get the filterStrig if it was entered, default in html is ""
-  var filterString = $('input[name=filterString]').val();
+  var filterString = $('input[name=filterString]').val().toLowerCase();
     console.log("filterString is: " + filterString);
 
       // Prevent form submission if form is used(!)
