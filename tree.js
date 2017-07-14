@@ -15,8 +15,6 @@ $('#intro input[name=profileName]').val()  + ".json",
 success: function(teamtree) {
   console.log(teamtree);
 
-
-
   // sort the object by earned_date using compareValues function
   var sortOrder = $( "input:checked" ).val();
       teamtree.badges.sort(compareValues('earned_date', sortOrder));
@@ -34,18 +32,14 @@ $( "form" ).submit(function( event ) {
 const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
-var filterStringCount = 0;
+
+var filterStringCount = 0;  // for later use when search string is used
 
 // iterate through object and place into document a line at a time
 // create div, place badge then badge info
 
 // append user name into div
   $('#userName').append(teamtree.badges.length + " Treehouse Video Badges earned by " + teamtree.name);
-
-// if user has entered a filterString we'll need a heading, default is filterString = ""
-// if (filterString != "" && filterStringCount > 0) {
-//   $('#userName').append("<h5>badges when filtered by \"" + filterString + "\": </h5>");
-// }
 
 // now iterate through object to get badges
     $.each(teamtree.badges, function( idx, badge) {
@@ -84,24 +78,19 @@ var filterStringCount = 0;
           "</span>");
 } // end for if myJSON statment
 
-
-
     }); // end outer each
 
+//  subheading with count for when a search string was used
     if (filterString != "" && filterStringCount > 0) {
       console.log("filterStringCount is " + filterStringCount);
       $('#userName').append(" <h5>" + filterStringCount +
       " badges when filtered by \"" + filterString + "\": </h5>");
     }
 
-    // if (filterStringCount > 0) $("h5").prepend("<i>xxxx</i>");
-  //   if (filterStringCount > 0) $("h5").prepend(filterStringCount + " ");
-  // console.log("filterStringCount is " + filterStringCount);
-
 // create and fill points earned section through iteration
 // first add the heading
 
-// we don't want the points appended if a subset of abdges was created by a filterString
+// we don't want the points appended if a subset of badges was created by a filterString
 if (filterString == 0 ) {
 
     $('#badgePoints').append("<p id='pointsHeader'>Total Points Earned by Category");
@@ -128,12 +117,10 @@ console.log(sortedArray);
         } ;  // end if
     } ;// end for i
 
-} // end if if (filterString == 0 )
-
-
-
+} // end if filterString == 0
 
 }, // end of success function
+
 error: function() {
   alert('Error... Can\'t find Treehouse profile name: ' +
   $('#intro input[name=profileName]').val());
@@ -141,13 +128,6 @@ error: function() {
 
 });  // end of ajax
 }); // end of button click function
-
-
-
-
-
-
-
 
 
     // function from https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
