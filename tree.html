@@ -11,11 +11,21 @@
 
 <div id="intro">
   <!-- <form> -->
-    <input type="radio" name="sortOrder" value="desc" checked/> Descending date earned <br />
-    <input type="radio" name="sortOrder" value="asc" /> Ascending date earned <br />
+  <fieldset>
+    <legend>Enter profile name</legend>
     <input type="text" name="profileName" value="alysonla">
+  </fieldset>
+  <fieldset>
+    <legend>Optional search string</legend>
     <input type="text" name="filterString" value="">
+  </fieldset>
+  <fieldset>
+    <legend>Sort by date earned</legend>
+    <input type="radio" name="sortOrder" value="desc" checked/> Desc
+    <input type="radio" name="sortOrder" value="asc" /> Asc
+  </fieldset>
     <button id="goButton">Go</button>
+    <button id="question">?</button>
   <!-- </form> -->
 </div>
 
