@@ -1,9 +1,13 @@
+$('#infoButton').click(function() {
+    $(function()  {
+      $('#userName').load('info.html');
+    });
+}); // end info click function
 
 $('#goButton').click(function() {
   // when goButton is clicked use ajax to get json file for entered profileName
 
   // make certain appropriate divs are empty to start
-  // $("#heading").empty();
   $("#userName").empty();
   $("#main_container").empty();
   $("#innerContainer").empty();
