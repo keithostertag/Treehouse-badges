@@ -15,4 +15,4 @@ Filtering the data by a search string enables you to limit the badges displayed 
 This page uses Google font Roboto, and only one Font Awesome icon (originally I had intended to use several so loading the set is kinda extravagant...)
 
 #### Screenshot
-![Screenshot](screenshot.png "Screenshot")
+![Screenshot](images/screenshot.png "Screenshot")
