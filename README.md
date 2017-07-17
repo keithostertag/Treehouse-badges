@@ -1,7 +1,7 @@
 # Treehouse-badges
 Exploring the Teamtreehouse badges json file for students
 
-In order to use this web service you will need a valid teamtreehouse.com profile name (several are listed when clicking the info (?) button on the page). This page uses Jquery and Flexbox so may not work with older browsers.
+In order to use this web service you will need a valid teamtreehouse.com profile name (several are listed when clicking the info (?) button on the page). This page uses Jquery and Flexbox so may not work with older browsers. Uses Kyle Fox's jquery-modal (https://github.com/kylefox/jquery-modal) only for presenting the info page.
 
 Enter the profile name (and an optional search string) then press "Go". The page may take several seconds to load if the user has earned many badges, so be patient.
 

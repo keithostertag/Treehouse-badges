@@ -23,7 +23,7 @@ body, html {
         transform: translate(-50%, -50%)
        }
 
-/*info div is only used for including the info.html file when the infoButton is pressed*/
+/*info div is only used for including the info.html file (modal) when the infoButton is pressed*/
 #info {
   display: block;
   width: 50%;
@@ -32,6 +32,7 @@ body, html {
   margin-right: auto;
   }
 
+/*responsiveness is handled quite well with flexbox!!!*/
 #wrapper  {
   display: flex;
   flex-direction: column;
@@ -129,6 +130,7 @@ img  {
   justify-content: center;
 }
 
+/*uses font awesome icon*/
 .fa {
   display: inline-block;
   color: green;
@@ -155,11 +157,3 @@ img  {
   font-weight: bold;
   margin-left: 2rem;
 }
-
-@media only screen and (max-width: 660px) {
-
-  #info {
-    width: 90%;
-    }
-
-} /*end of media queries*/

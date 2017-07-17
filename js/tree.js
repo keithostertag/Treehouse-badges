@@ -1,13 +1,10 @@
-// load info into page when infoButton is clicked
-// $('#infoButton').click(function() {
-    // emptyDivs();
+// load info/modal page when infoButton is clicked
 
 $('#infoButton').click(function(e) {
     e.preventDefault();
     $.get("info.html", function(h) {
       $(h).appendTo('#info').modal();
           });
-
       }); // end infoButton click function
 
 $('#goButton').click(function() {
@@ -16,13 +13,17 @@ $('#goButton').click(function() {
   // make certain appropriate divs are empty to start
   emptyDivs();
 
-$('#userName').append('<img id="loading" src="ajax-loader.gif">');
+  var user = $('#intro input[name=profileName]').val();
+
+// display a gif icon because server is slow especially with lots of badges
+if(user.length > 1)  {
+$('#userName').append('<img id="loading" src="images/ajax-loader.gif">');
+        }
 
 $.ajax({
-url:"https://teamtreehouse.com/" +
-$('#intro input[name=profileName]').val()  + ".json",
+url:"https://teamtreehouse.com/" + user  + ".json",
 success: function(teamtree) {
-  console.log(teamtree);
+  // console.log(teamtree);
 
   // sort the object by earned_date using compareValues function
   var sortOrder = $( "input:checked" ).val();
@@ -30,7 +31,7 @@ success: function(teamtree) {
 
 // get the filterString if it was entered, default in html is ""
   var filterString = $('input[name=filterString]').val().toLowerCase();
-    console.log("filterString is: " + filterString);
+    // console.log("filterString is: " + filterString);
 
 // setup for month short names for later use with dates
 const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -53,7 +54,7 @@ var filterStringCount = 0;  // for later use when search string is used
 // create a stringified temp var so we can use indexOf
 // to check for occurances of filterString anywhere in object
       var myJSON= JSON.stringify(this).toLowerCase();
-      console.log("filterString2 is: " + filterString);
+      // console.log("filterString2 is: " + filterString);
 
 // check to see if user has entered a filter string
 // default is filterString = "" in index.html- so append them all unless filterString false
@@ -88,7 +89,7 @@ var filterStringCount = 0;  // for later use when search string is used
 
 //  create a subheading with count for when a search string was used
     if (filterString != "" && filterStringCount > 0) {
-      console.log("filterStringCount is " + filterStringCount);
+      // console.log("filterStringCount is " + filterStringCount);
       $('#userName').append(" <h5>" + filterStringCount +
       " badges when filtered by \"" + filterString + "\": </h5>");
           } else if (filterString != "" && filterStringCount == 0) {
@@ -115,11 +116,11 @@ if (filterString == 0 ) {
       return a[1] - b[1];  // sort on points
         });
 
-console.log(sortedArray);
+// console.log(sortedArray);
 // only display the points for categories that have points > 0
     for (i=0;i<sortedArray.length;i++) {
         if (sortedArray[i][1] !== 0) {
-              console.log(sortedArray[i][0] + ": " + sortedArray[i][1]);
+              // console.log(sortedArray[i][0] + ": " + sortedArray[i][1]);
               var temp = "<p class='points'>" + sortedArray[i][0] + ": " + sortedArray[i][1] + "</p>";
               document.getElementById('badgePoints').innerHTML += temp;
         } ;  // end if
