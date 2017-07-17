@@ -1,8 +1,14 @@
 // load info into page when infoButton is clicked
-$('#infoButton').click(function() {
-    emptyDivs();
-    $('#info').load('info.html');
-        }); // end infoButton click function
+// $('#infoButton').click(function() {
+    // emptyDivs();
+
+$('#infoButton').click(function(e) {
+    e.preventDefault();
+    $.get("info.html", function(h) {
+      $(h).appendTo('#info').modal();
+          });
+
+      }); // end infoButton click function
 
 $('#goButton').click(function() {
   // when goButton is clicked use ajax to get json file for entered profileName
